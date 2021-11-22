@@ -1,0 +1,25 @@
+.customDatePickerWidth,
+.customDatePickerWidth > div.react-datepicker-wrapper,
+.customDatePickerWidth
+  > div
+  > div.react-datepicker__input-container
+  .customDatePickerWidth
+  > div
+  > div.react-datepicker__input-container
+  input {
+  width: 400px;
+}
+
+.MuiInputBase-input {
+  width: 400px;
+}
+
+@tailwind components;
+
+@layer components {
+  .button {
+    @apply px-4 py-2 border rounded-full cursor-pointer
+    hover:shadow-lg active:scale-95 active:bg-gray-100 transition 
+    transform duration-100 ease-out;
+  }
+}

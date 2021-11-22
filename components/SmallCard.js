@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-function SmallCard({ img, timestamp, location }) {
+function SmallCard({ img, timestamp, location, address }) {
   return (
     <div
       className="flex items-center m-2 mt-5 space-x-4 rounded-xl
@@ -18,9 +18,12 @@ function SmallCard({ img, timestamp, location }) {
       </div>
 
       {/* right */}
-      <div>
+      <div className="relative h-96 w-48">
         <h2>{timestamp.substr(0, 10)}</h2>
         <h2>{timestamp.substr(11, 8)}</h2>
+        <h3 className="text-gray-800">
+          <b>Addr:</b> {address}
+        </h3>
         <h3 className="text-gray-500">Lat: {location.latitude}</h3>
         <h3 className="text-gray-500">Lon: {location.longitude}</h3>
       </div>
