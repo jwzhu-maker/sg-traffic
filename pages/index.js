@@ -123,7 +123,7 @@ export async function getStaticProps() {
 
   // const reverseGeoAddress = await fetch(
   //   "https://maps.googleapis.com/maps/api/geocode/json?latlng=35.6512,139.68&key=" +
-  //     "AIzaSyBf_9Uht1Ie2DEWtLg64aEiRtwll34uMnY"
+  //     process.env.GOOGLE_MAPS_APIKEY
   // ).then((res) => res.json());
 
   return {
