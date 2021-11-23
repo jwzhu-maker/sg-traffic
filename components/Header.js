@@ -42,7 +42,7 @@ function Header({ placeholder }) {
         className="relative  items-center h-10 cursor-pointer my-auto"
       >
         <Image
-          src="/../public/trafficcam.png"
+          src="/trafficcam.png"
           layout="fill"
           objectFit="contain"
           objectPosition="left"
