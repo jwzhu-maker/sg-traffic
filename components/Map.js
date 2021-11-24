@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
-import getCenter from "geoLib/es/getCenter";
+// import getCenter from "geoLib/es/getCenter";
+import { getCenter } from "geolib";
 
 function Map({ searchResults }) {
   const [selectedLocation, setSelectedLocation] = useState({});
@@ -53,13 +54,13 @@ function Map({ searchResults }) {
           {/* The popup is only visible when a marker is clicked */}
           {selectedLocation.long === result.long && (
             <Popup
-              className="rounded-lg bg-red-400"
+              className="rounded-lg bg-red-400 z-50"
               onClose={() => setSelectedLocation({})}
               closeOnClick={true}
               latitude={result.lat}
               longitude={result.long}
             >
-              <p className="text-blue-400 rounded-lg">{result.title}</p>
+              <p className="text-blue-400">{result.title}</p>
             </Popup>
           )}
         </div>
