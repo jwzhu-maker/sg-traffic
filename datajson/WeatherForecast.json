@@ -1,0 +1,32 @@
+{
+  "URL": "https://api.data.gov.sg/v1/environment/2-hour-weather-forecast?date_time=2021-11-24T03%3A14%3A00",
+
+  "api_info": {
+    "status": "healthy"
+  },
+  "area_metadata": [
+    {
+      "name": "string",
+      "label_location": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    }
+  ],
+  "items": [
+    {
+      "update_timestamp": "2021-11-23T20:36:23.118Z",
+      "timestamp": "2021-11-23T20:36:23.118Z",
+      "valid_period": {
+        "start": "2021-11-23T20:36:23.118Z",
+        "end": "2021-11-23T20:36:23.118Z"
+      },
+      "forecasts": [
+        {
+          "area": "string",
+          "forecast": "string"
+        }
+      ]
+    }
+  ]
+}

@@ -9,11 +9,16 @@ import Footer from "../components/Footer";
 import { useState } from "react";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-export default function Home({ exploreData, cardsData, addressData }) {
+export default function Home({
+  trafficData,
+  weatherData,
+  cardsData,
+  addressData,
+}) {
   const [eachAddress, setEachAddress] = useState([]);
 
   // console.log(reverseGeoAddress);
-  // console.log(exploreData);
+  // console.log(trafficData);
   // console.log(addressData);
 
   return (
@@ -23,7 +28,7 @@ export default function Home({ exploreData, cardsData, addressData }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header />
+      <Header weatherData={weatherData} />
       <Banner />
       <main className="max-w-7xl mx-auto px-8 sm:px-16">
         <section className="pt-6">
@@ -32,13 +37,14 @@ export default function Home({ exploreData, cardsData, addressData }) {
           </h2>
           {/* Pull some data from server - API */}
           <div className="grid grid-cols-1 sm:grid-cols-2">
-            {exploreData.items[0].cameras?.map((item, i) => (
+            {trafficData.items[0].cameras?.map((item, i) => (
               <SmallCard
                 key={i}
                 img={item.image}
                 timestamp={item.timestamp}
                 location={item.location}
                 address={addressData[i].formatted_address}
+                // weather={weatherForecast[i]}
               />
             ))}
           </div>
@@ -74,10 +80,23 @@ export async function getStaticProps() {
   const date = new Date(+new Date() + 8 * 3600 * 1000);
   var dateString = date.toISOString();
 
-  const exploreData = await fetch(
+  const trafficData = await fetch(
     "https://api.data.gov.sg/v1/transport/traffic-images?date_time=" +
       dateString.substring(0, 19)
   ).then((res) => res.json());
+
+  const weatherData = await fetch(
+    "https://api.data.gov.sg/v1/environment/air-temperature?date=" +
+      dateString.substring(0, 10)
+  ).then((res) => res.json());
+
+  // weather Icons
+  // ☀️ 🌤 ⛅️ 🌥 ☁️ 🌦 🌧 ⛈ 🌩 🌨 ❄️ ☃️ ⛄️ 🌬 💨 💧 💦 ☔️ ☂️
+
+  // const weatherForecastData = await fetch(
+  //   "https://api.data.gov.sg/v1/environment/2-hour-weather-forecast?date_time=" +
+  //     dateString
+  // ).then((res) => res.json());
 
   const cardsData = await fetch("https://links.papareact.com/zp1").then((res) =>
     res.json()
@@ -111,14 +130,13 @@ export async function getStaticProps() {
     // console.log(reverseGeoAddress.results[0].formatted_address);
   };
 
-  for (let i = 0; i < exploreData.items[0].cameras.length; i++) {
-    // console.log(exploreData.items[0].cameras[i].location);
+  // Reverse Geocoding temporily disabled, as it causes too many requests to Google Maps API
+  for (let i = 0; i < trafficData.items[0].cameras.length; i++) {
+    // console.log(trafficData.items[0].cameras[i].location);
     await getReverseGeoAddress(
-      exploreData.items[0].cameras[i].location,
+      trafficData.items[0].cameras[i].location,
       address1
     );
-
-    //addressData.push(address1);
   }
 
   // const reverseGeoAddress = await fetch(
@@ -128,7 +146,9 @@ export async function getStaticProps() {
 
   return {
     props: {
-      exploreData,
+      trafficData,
+      weatherData,
+      // weatherForecastData,
       cardsData,
       addressData,
       // reverseGeoAddress,

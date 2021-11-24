@@ -5,7 +5,7 @@ import InfoCard from "../components/InfoCard";
 import { format } from "date-fns";
 import Map from "../components/Map";
 
-function Search({ searchResults }) {
+function Search({ searchResults, weatherData }) {
   console.log(searchResults);
   const router = useRouter();
   const { location, queryDate } = router.query;
@@ -16,7 +16,10 @@ function Search({ searchResults }) {
 
   return (
     <div>
-      <Header placeholder={`${location} | ${formattedDate}`} />
+      <Header
+        placeholder={`${location} | ${formattedDate}`}
+        weatherData={weatherData}
+      />
       <main className="flex">
         <section className="flex-grow pt-14 px-6">
           <p className="text-xs">300+ Stays for {location} guests</p>
@@ -50,7 +53,7 @@ function Search({ searchResults }) {
         </section>
 
         <section className="hidden xl:inline-flex xl:min-w-[600px]">
-          <Map />
+          <Map searchResults={searchResults} />
         </section>
       </main>
 
@@ -62,12 +65,20 @@ function Search({ searchResults }) {
 export default Search;
 
 export async function getServerSideProps() {
+  const date = new Date(+new Date() + 8 * 3600 * 1000);
+  var dateString = date.toISOString();
   const searchResults = await fetch("https://links.papareact.com/isz").then(
     (res) => res.json()
   );
+  const weatherData = await fetch(
+    "https://api.data.gov.sg/v1/environment/air-temperature?date=" +
+      dateString.substring(0, 10)
+  ).then((res) => res.json());
+
   return {
     props: {
       searchResults,
+      weatherData,
     },
   };
 }

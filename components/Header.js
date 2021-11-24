@@ -11,8 +11,9 @@ import { useState } from "react";
 
 import { DateTimePicker } from "@material-ui/pickers";
 import { useRouter } from "next/dist/client/router";
+import { format } from "date-fns";
 
-function Header({ placeholder }) {
+function Header({ placeholder, weatherData }) {
   const [searchInput, setSearchInput] = useState("");
   const [noOfGuests, setNoOfGuests] = useState(87);
   const router = useRouter();
@@ -20,6 +21,11 @@ function Header({ placeholder }) {
   const resetInput = () => {
     setSearchInput("");
   };
+
+  const lastWeather = weatherData.items[weatherData.items.length - 3];
+  const temperature = lastWeather.readings[4].value;
+  const timeStamp = lastWeather.timestamp;
+  const formattedDate = format(new Date(timeStamp), "dd/MM/yy h:mm:ss");
 
   const [selectedDate, handleDateChange] = useState(new Date());
 
@@ -70,13 +76,21 @@ function Header({ placeholder }) {
 
       {/* right */}
       <div className="flex items-center space-x-4 justify-end text-gray-500">
-        <p className="hidden md:inline cursor-pointer">Whether forecast</p>
-        <GlobeAltIcon className="h-6 cursor-pointer animate-spin" />
+        <div className="cursor-pointer text-bold text-xl lg:text-3xl ">
+          🌦 {temperature}&#176;C
+        </div>
+        <div className="hidden md:inline cursor-pointer text-lg">Singapore</div>
 
-        <div className="flex items-center space-x-2 border-2 p-2 rounded-full">
+        {/* <GlobeAltIcon className="h-6 cursor-pointer animate-spin" /> */}
+        <div className="h-6 cursor-pointer animate-spin text-lg">🌎</div>
+
+        <div className="hidden md:inline justify-end text-sm text-gray-400">
+          {formattedDate}
+        </div>
+        {/* <div className="flex items-center space-x-2 border-2 p-2 rounded-full">
           <MenuIcon className="h-6" />
           <UserCircleIcon className="h-6" />
-        </div>
+        </div> */}
       </div>
 
       {searchInput && (

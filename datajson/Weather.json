@@ -1,0 +1,33 @@
+{
+  "URL": "https://api.data.gov.sg/v1/environment/air-temperature?date_time=2021-11-24T03%3A14%3A00%2B08%3A00&date=2021-11-24",
+
+  "api_info": {
+    "status": "healthy"
+  },
+  "metadata": {
+    "stations": [
+      {
+        "id": "string",
+        "device_id": "string",
+        "name": "string",
+        "location": {
+          "longitude": 0,
+          "latitude": 0
+        }
+      }
+    ],
+    "reading_type": "string",
+    "reading_unit": "string"
+  },
+  "items": [
+    {
+      "timestamp": "2021-11-23T20:37:26.989Z",
+      "readings": [
+        {
+          "station_id": "string",
+          "value": 0
+        }
+      ]
+    }
+  ]
+}
