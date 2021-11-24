@@ -1,8 +1,10 @@
 import { useState } from "react";
-import ReactMapGL, {Marker, Popup} from "react-map-gl";
+import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import getCenter from "geoLib/es/getCenter";
 
 function Map({ searchResults }) {
+  const [selectedLocation, setSelectedLocation] = useState({});
+
   // Transform the search results into a list of coordinates
   const coordinates = searchResults.map((result) => ({
     longitude: result.long,
@@ -23,7 +25,7 @@ function Map({ searchResults }) {
     zoom: 12,
   });
 
-  // 👨🏻‍🚀  🪠  👨‍🦯
+  // 👨🏻‍🚀  🪠  👨‍🦯 📌
   return (
     <ReactMapGL
       mapStyle={"mapbox://styles/mapbox/streets-v11"}
@@ -33,11 +35,36 @@ function Map({ searchResults }) {
     >
       {searchResults.map((result) => (
         <div key={result.long}>
-          <Marker></Marker>
-          </div>
-          ))}
+          <Marker
+            longitude={result.long}
+            latitude={result.lat}
+            offsetLeft={-20}
+            offsetTop={-10}
+          >
+            <p
+              onClick={() => setSelectedLocation(result)}
+              className="cursor-pointer text-2xl animate-bounce"
+              aria-label="push-pin"
+            >
+              📌
+            </p>
+          </Marker>
 
-      </ReactMapGL>
+          {/* The popup is only visible when a marker is clicked */}
+          {selectedLocation.long === result.long && (
+            <Popup
+              className="rounded-lg bg-red-400"
+              onClose={() => setSelectedLocation({})}
+              closeOnClick={true}
+              latitude={result.lat}
+              longitude={result.long}
+            >
+              <p className="text-blue-400 rounded-lg">{result.title}</p>
+            </Popup>
+          )}
+        </div>
+      ))}
+    </ReactMapGL>
   );
 }
 

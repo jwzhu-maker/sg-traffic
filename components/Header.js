@@ -102,7 +102,7 @@ function Header({ placeholder, weatherData }) {
             className="cursor-pointer w-[400px]"
             dateRangeIcon={<UsersIcon className="h-6" />}
             value={selectedDate}
-            onChange={(handleDateChange) => console.log(handleDateChange)}
+            onChange={(Date) => handleDateChange(Date)}
           />
 
           <div className="flex items-center border-b mb-4">
