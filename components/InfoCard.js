@@ -24,14 +24,14 @@ function InfoCard({
   // ☀️ 🌤 ⛅️ 🌥 ☁️ 🌦 🌧 ⛈ 🌩 🌨 ❄️ ☃️ ⛄️ 🌬 💨 💧 💦 ☔️ ☂️
   const WeatherIcon = (props) => {
     console.log(props);
-    switch (props.weatherDescription) {
+    switch (props.weatherDescription.toLowerCase()) {
       case "clear sky":
         return "🌤";
       case "few clouds":
         return "⛅️";
-      case "Cloudy":
+      case "cloudy":
         return "🌥";
-      case "Raining":
+      case "raining":
         return "🌧";
       case "thunderstorm":
         return "⛈";

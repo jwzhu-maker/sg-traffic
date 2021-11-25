@@ -101,7 +101,9 @@ function Search({ weatherData, temperatureData }) {
               star={""}
               longitude={searchLng}
               latitude={searchLat}
-              weatherNameLocation={weatherNameLocation + " " + distance + "m away"}
+              weatherNameLocation={
+                weatherNameLocation + " " + minDistance + "m away"
+              }
               weatherDescription={weatherDescription}
               temperature={temperature}
             />
