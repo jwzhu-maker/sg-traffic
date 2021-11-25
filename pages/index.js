@@ -14,9 +14,8 @@ export default function Home({
   weatherData,
   cardsData,
   addressData,
+  trafficAddressData,
 }) {
-  const [eachAddress, setEachAddress] = useState([]);
-
   // console.log(reverseGeoAddress);
   // console.log(trafficData);
   // console.log(addressData);
@@ -28,7 +27,12 @@ export default function Home({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header weatherData={weatherData} />
+      <Header
+        trafficData={trafficData}
+        weatherData={weatherData}
+        addressData={addressData}
+        trafficAddressData={trafficAddressData}
+      />
       <Banner />
       <main className="max-w-7xl mx-auto px-8 sm:px-16">
         <section className="pt-6">
@@ -90,7 +94,7 @@ export async function getStaticProps() {
       dateString.substring(0, 10)
   ).then((res) => res.json());
 
-  // weather Icons
+  // weather Emoji Icons
   // ☀️ 🌤 ⛅️ 🌥 ☁️ 🌦 🌧 ⛈ 🌩 🌨 ❄️ ☃️ ⛄️ 🌬 💨 💧 💦 ☔️ ☂️
 
   // const weatherForecastData = await fetch(
@@ -139,6 +143,16 @@ export async function getStaticProps() {
     );
   }
 
+  // Prepare data for the traffic and address data mapping
+  const trafficAddressData = trafficData.items[0].cameras?.map((item, i) => ({
+    cameraId: item.camera_id,
+    imageUrl: item.image,
+    location: item.location,
+    address: addressData[i].formatted_address + " (" + item.camera_id + ")",
+  }));
+
+  console.log(trafficAddressData);
+
   // const reverseGeoAddress = await fetch(
   //   "https://maps.googleapis.com/maps/api/geocode/json?latlng=35.6512,139.68&key=" +
   //     process.env.GOOGLE_MAPS_APIKEY
@@ -151,7 +165,7 @@ export async function getStaticProps() {
       // weatherForecastData,
       cardsData,
       addressData,
-      // reverseGeoAddress,
+      trafficAddressData,
     },
   };
 }

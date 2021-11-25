@@ -13,9 +13,19 @@ import { DateTimePicker } from "@material-ui/pickers";
 import { useRouter } from "next/dist/client/router";
 import { format } from "date-fns";
 
-function Header({ placeholder, weatherData }) {
+function Header({
+  placeholder,
+  trafficData,
+  weatherData,
+  addressData,
+  trafficAddressData,
+}) {
   const [searchInput, setSearchInput] = useState("");
-  const [noOfGuests, setNoOfGuests] = useState(87);
+  const [noOfCameras, setnoOfCameras] = useState(87);
+  const [selectedCamera, setSelectedCamera] = useState(null);
+  const [selectedAddress, setSelectedAddress] = useState("");
+
+  let newAddressData = addressData;
   const router = useRouter();
 
   const resetInput = () => {
@@ -29,12 +39,44 @@ function Header({ placeholder, weatherData }) {
 
   const [selectedDate, handleDateChange] = useState(new Date());
 
+  function GetCameraAddresses(props) {
+    const trafficAddressData = props.addresses;
+    if (searchInput === " " || searchInput === ".") {
+      return trafficAddressData.map((item, i) => (
+        <option key={i} value={item.address}>
+          {trafficAddressData[i].address}
+        </option>
+      ));
+    } else {
+      console.log(searchInput);
+      newAddressData = trafficAddressData.filter((item, i) =>
+        item.address.toLowerCase().includes(searchInput.toLowerCase())
+      );
+
+      return newAddressData.map((item, i) => (
+        <option key={i} value={item.address}>
+          {newAddressData[i].address}
+        </option>
+      ));
+    }
+  }
+
   const search = () => {
+    const selectedCamera = trafficAddressData.find(
+      (item) => item.address === searchInput
+    );
+
+    console.log(selectedCamera);
+
     router.push({
       pathname: "/search",
       query: {
-        location: searchInput,
+        searchInput: searchInput,
         queryDate: selectedDate.toISOString(),
+        cameraId: selectedCamera.cameraId,
+        imageUrl: selectedCamera.imageUrl,
+        searchLng: selectedCamera.location.longitude,
+        searchLat: selectedCamera.location.latitude,
       },
     });
     resetInput;
@@ -104,29 +146,43 @@ function Header({ placeholder, weatherData }) {
             value={selectedDate}
             onChange={(Date) => handleDateChange(Date)}
           />
-
           <div className="flex items-center border-b mb-4">
             <h2 className="text-2xl flex-grow font-semibold">
               Total camera numbers:
             </h2>
-            <UsersIcon className="h-5 align:right" />
+            {/* <UsersIcon className="h-5 align:right" /> */}
+            📷
             <input
-              value={noOfGuests}
-              onChange={(e) => setNoOfGuests(e.target.value)}
+              value={noOfCameras}
+              onChange={(e) => setnoOfCameras(e.target.value)}
               type="number"
               min={1}
               className="w-12 pl-2 text-lg outline-none text-red-400"
             />
           </div>
-
           <div className="flex">
-            <button onClick={resetInput} className="flex-grow text-gray-500">
+            <button
+              onClick={resetInput}
+              className="flex-grow button text-gray-500"
+            >
               Cancel
             </button>
-            <button onClick={search} className="flex-grow text-blue-400">
+            <button onClick={search} className="flex-grow button text-blue-400">
               Search
             </button>
           </div>
+          <select
+            name="Cameras"
+            size="5"
+            multiple="multiple"
+            className="w-[400px] h-[200px] py-4 bg-transparent outline-none text-gray-600"
+            onChange={(e) => {
+              setSelectedAddress(e.target.value);
+              setSearchInput(e.target.value);
+            }}
+          >
+            <GetCameraAddresses addresses={trafficAddressData} />
+          </select>
         </div>
       )}
     </header>
