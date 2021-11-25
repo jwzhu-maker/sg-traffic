@@ -30,8 +30,25 @@ function Search({ weatherData, temperatureData }) {
     searchLat,
   } = router.query;
 
-  console.log(cameraId);
-  console.log(imageUrl);
+  const [realTimeImgUrl, setRealTimeImgUrl] = useState(imageUrl);
+
+  console.log(queryDate);
+  const trafficData = getTrafficData(
+    new Date(+new Date(queryDate) + 8 * 3600 * 1000).toISOString()
+  );
+  trafficData.then((res) => {
+    console.log(res);
+    if (res.items[0].cameras) {
+      const camera = res.items[0].cameras.find(
+        (item) => item.camera_id === cameraId
+      );
+      console.log(camera);
+      setRealTimeImgUrl(camera.image);
+    } else {
+      setRealTimeImgUrl(imageUrl);
+    }
+  });
+
   const formattedDate = format(
     new Date(queryDate),
     "EEE, dd MMMM yyyy, hh:mm:ss aaa"
@@ -93,8 +110,8 @@ function Search({ weatherData, temperatureData }) {
 
           <div className="flex flex-col">
             <InfoCard
-              key={imageUrl}
-              img={imageUrl}
+              key={realTimeImgUrl}
+              img={realTimeImgUrl}
               location={"Singapore"}
               searchInput={searchInput}
               formattedDate={formattedDate}

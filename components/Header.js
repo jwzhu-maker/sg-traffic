@@ -21,7 +21,7 @@ function Header({
   trafficAddressData,
 }) {
   const [searchInput, setSearchInput] = useState("");
-  const [noOfCameras, setnoOfCameras] = useState(87);
+  const [noOfCameras, setnoOfCameras] = useState(trafficAddressData.length);
   const [selectedCamera, setSelectedCamera] = useState(null);
   const [selectedAddress, setSelectedAddress] = useState("");
 
@@ -67,6 +67,7 @@ function Header({
     );
 
     console.log(selectedCamera);
+    console.log(selectedDate.toISOString());
 
     router.push({
       pathname: "/search",

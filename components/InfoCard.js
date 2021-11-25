@@ -52,7 +52,7 @@ function InfoCard({
 
   return (
     <div
-      className="flex py-7 px-2 border-b cursor-pointer hover:opacity-80
+      className="flex py-7 px-2 border-b cursor-pointer hover:opacity-90
     hover:shadow-lg hover:border-4 hover:border-blue-300 transition
     duration-200 ease-out first:border-t"
       onClick={() => setIsOpen(true)}
@@ -69,7 +69,7 @@ function InfoCard({
       <div className="flex flex-col flex-grow pl-5">
         <div className="flex justify-between">
           <p> {location} </p>
-          <HeartIcon className="h-7 cursor-pointer" />
+          <div className="h-7 cursor-pointer text-2xl">👻🚴🏼‍♀️</div>
         </div>
         <h4 className="text-xl">
           <span className="font-bold">{searchInput}</span>

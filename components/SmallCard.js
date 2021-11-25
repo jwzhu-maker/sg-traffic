@@ -17,7 +17,7 @@ function SmallCard({ img, timestamp, location, address, trafficAddressData }) {
         pathname: "/search",
         query: {
           searchInput: address,
-          queryDate: new Date(+new Date() + 8 * 3600 * 1000).toISOString(),
+          queryDate: new Date().toISOString(),
           cameraId: selectedCamera.cameraId,
           imageUrl: selectedCamera.imageUrl,
           searchLng: selectedCamera.location.longitude,
