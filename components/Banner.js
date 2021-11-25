@@ -1,7 +1,16 @@
 import Image from "next/image";
 import Map from "../components/Map";
 
-function Banner() {
+function Banner({ trafficAddressData }) {
+  const searchResults = trafficAddressData.map((item, i) => ({
+    id: i,
+    longitude: item.location.longitude,
+    latitude: item.location.latitude,
+    title: item.address,
+  }));
+
+  console.log(searchResults);
+
   return (
     <div className="relative h-[300px] sm:h-[400px] lg:h-[500px] xl:h-[600px] 2xl:h-[700px]">
       {/* <Image priority src="/Singapore_Map.png" layout="fill" objectFit="cover" />
@@ -16,15 +25,7 @@ function Banner() {
         </button>
       </div> */}
 
-      <Map
-        searchResults={[
-          {
-            long: parseFloat("103.81"),
-            lat: parseFloat("1.3314"),
-            title: "Singapore",
-          },
-        ]}
-      />
+      <Map searchResults={searchResults} key={searchResults.id} />
     </div>
   );
 }

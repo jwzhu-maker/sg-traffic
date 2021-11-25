@@ -32,7 +32,7 @@ export default function Home({
         addressData={addressData}
         trafficAddressData={trafficAddressData}
       />
-      <Banner />
+      <Banner trafficAddressData={trafficAddressData}/>
       <main className="max-w-7xl mx-auto px-8 sm:px-16">
         <section className="pt-6">
           <h2 className="text-4xl font-semibold pb-5">

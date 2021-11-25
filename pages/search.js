@@ -114,8 +114,8 @@ function Search({ weatherData, temperatureData }) {
           <Map
             searchResults={[
               {
-                long: parseFloat(searchLng),
-                lat: parseFloat(searchLat),
+                longitude: parseFloat(searchLng),
+                latitude: parseFloat(searchLat),
                 title: searchInput,
               },
             ]}
