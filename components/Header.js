@@ -107,7 +107,7 @@ function Header({
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
           type="text"
-          placeholder={placeholder || "Start your search"}
+          placeholder={placeholder || "Start your search. | Type '.' for all cameras."}
           className="flex-grow pl-5 bg-transparent outline-none text-gray-600 text-sm placeholder-gray-400"
         />
         <SearchIcon
