@@ -12,7 +12,6 @@ import "mapbox-gl/dist/mapbox-gl.css";
 export default function Home({
   trafficData,
   weatherData,
-  cardsData,
   addressData,
   trafficAddressData,
 }) {
@@ -102,10 +101,6 @@ export async function getStaticProps() {
   //     dateString
   // ).then((res) => res.json());
 
-  const cardsData = await fetch("https://links.papareact.com/zp1").then((res) =>
-    res.json()
-  );
-
   let addressData = new Array();
   let address1 = {};
   const getReverseGeoAddress = async (location, address) => {
@@ -163,7 +158,6 @@ export async function getStaticProps() {
       trafficData,
       weatherData,
       // weatherForecastData,
-      cardsData,
       addressData,
       trafficAddressData,
     },

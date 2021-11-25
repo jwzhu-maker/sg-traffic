@@ -135,9 +135,6 @@ export default Search;
 export async function getServerSideProps() {
   const date = new Date(+new Date() + 8 * 3600 * 1000);
   var dateString = date.toISOString();
-  // const searchResults = await fetch("https://links.papareact.com/isz").then(
-  //   (res) => res.json()
-  // );
 
   const weatherData = await fetch(
     "https://api.data.gov.sg/v1/environment/2-hour-weather-forecast?date_time=" +
