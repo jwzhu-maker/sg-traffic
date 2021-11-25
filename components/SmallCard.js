@@ -1,10 +1,37 @@
 import Image from "next/image";
+import { useRouter } from "next/dist/client/router";
 
-function SmallCard({ img, timestamp, location, address }) {
+function SmallCard({ img, timestamp, location, address, trafficAddressData }) {
+  const router = useRouter();
+
+  const search = (address) => {
+    console.log(address);
+    const selectedCamera = trafficAddressData.find(
+      (item) => item.address === address
+    );
+
+    console.log(selectedCamera);
+
+    if (selectedCamera) {
+      router.push({
+        pathname: "/search",
+        query: {
+          searchInput: address,
+          queryDate: new Date(+new Date() + 8 * 3600 * 1000).toISOString(),
+          cameraId: selectedCamera.cameraId,
+          imageUrl: selectedCamera.imageUrl,
+          searchLng: selectedCamera.location.longitude,
+          searchLat: selectedCamera.location.latitude,
+        },
+      });
+    }
+  };
+
   return (
     <div
+      onClick={() => search(address)}
       className="flex items-center m-2 mt-5 space-x-4 rounded-xl
-     cursor-pointer  hover:opacity-80
+     cursor-pointer  hover:opacity-95
      hover:shadow-lg hover:border-4 hover:border-blue-300 transition
      transform duration-200 ease-out"
     >

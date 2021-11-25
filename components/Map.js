@@ -58,7 +58,7 @@ function Map({ searchResults }) {
               longitude={result.longitude}
               latitude={result.latitude}
             >
-              <p className="text-blue-400">{result.title}</p>
+              <p className="text-blue-400">{result.address}</p>
             </Popup>
           )}
         </div>

@@ -32,7 +32,7 @@ export default function Home({
         addressData={addressData}
         trafficAddressData={trafficAddressData}
       />
-      <Banner trafficAddressData={trafficAddressData}/>
+      <Banner trafficAddressData={trafficAddressData} />
       <main className="max-w-7xl mx-auto px-8 sm:px-16">
         <section className="pt-6">
           <h2 className="text-4xl font-semibold pb-5">
@@ -46,7 +46,9 @@ export default function Home({
                 img={item.image}
                 timestamp={item.timestamp}
                 location={item.location}
-                address={addressData[i].formatted_address}
+                address={trafficAddressData[i].address}
+                trafficAddressData={trafficAddressData}
+
                 // weather={weatherForecast[i]}
               />
             ))}
@@ -145,8 +147,6 @@ export async function getStaticProps() {
     location: item.location,
     address: addressData[i].formatted_address + " (" + item.camera_id + ")",
   }));
-
-  console.log(trafficAddressData);
 
   // const reverseGeoAddress = await fetch(
   //   "https://maps.googleapis.com/maps/api/geocode/json?latlng=35.6512,139.68&key=" +

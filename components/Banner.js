@@ -6,7 +6,7 @@ function Banner({ trafficAddressData }) {
     id: i,
     longitude: item.location.longitude,
     latitude: item.location.latitude,
-    title: item.address,
+    address: item.address,
   }));
 
   console.log(searchResults);
@@ -25,7 +25,7 @@ function Banner({ trafficAddressData }) {
         </button>
       </div> */}
 
-      <Map searchResults={searchResults} key={searchResults.id} />
+      <Map searchResults={searchResults} />
     </div>
   );
 }

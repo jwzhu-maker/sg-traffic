@@ -23,14 +23,16 @@ function InfoCard({
   // weather Emoji Icons
   // ☀️ 🌤 ⛅️ 🌥 ☁️ 🌦 🌧 ⛈ 🌩 🌨 ❄️ ☃️ ⛄️ 🌬 💨 💧 💦 ☔️ ☂️
   const WeatherIcon = (props) => {
-    console.log(props);
+    // console.log(props);
     switch (props.weatherDescription.toLowerCase()) {
       case "clear sky":
         return "🌤";
-      case "few clouds":
-        return "⛅️";
       case "cloudy":
+        return "⛅️";
+      case "partly cloudy (day)":
         return "🌥";
+      case "partly cloudy (night)":
+        return "💨";
       case "raining":
         return "🌧";
       case "thunderstorm":
@@ -41,6 +43,8 @@ function InfoCard({
         return "🌨";
       case "haze":
         return "🌩";
+      case "snow":
+        return "⛄️";
       default:
         return "🌦";
     }

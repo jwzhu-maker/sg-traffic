@@ -116,7 +116,7 @@ function Search({ weatherData, temperatureData }) {
               {
                 longitude: parseFloat(searchLng),
                 latitude: parseFloat(searchLat),
-                title: searchInput,
+                address: searchInput,
               },
             ]}
           />
