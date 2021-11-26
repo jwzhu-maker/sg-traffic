@@ -5,7 +5,6 @@ import SmallCard from "../components/SmallCard";
 import MediumCard from "../components/MediumCard";
 import LargeCard from "../components/LargeCard";
 import Footer from "../components/Footer";
-// import { GOOGLE_MAPS_APIKEY } from "@env";
 import { useState } from "react";
 import "mapbox-gl/dist/mapbox-gl.css";
 

@@ -23,7 +23,7 @@ function Map({ searchResults }) {
     zoom: 11,
   });
 
-  // 👨🏻‍🚀  🪠  👨‍🦯 📌
+  // 👨🏻‍🚀  🪠  👨‍🦯  📌  👻  🚴🏼‍♀️
   return (
     <ReactMapGL
       mapStyle={"mapbox://styles/mapbox/streets-v11"}
@@ -41,7 +41,7 @@ function Map({ searchResults }) {
           >
             <p
               onClick={() => setSelectedLocation(result)}
-              onDoubleClick={() => setSelectedLocation({result})}
+              onDoubleClick={() => setSelectedLocation({ result })}
               className="cursor-pointer text-2xl animate-bounce"
               aria-label="push-pin"
             >

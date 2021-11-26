@@ -61,12 +61,12 @@ function Search({ weatherData, temperatureData }) {
     latitude: searchLat,
   };
 
-  console.log(weatherData);
-  const distance = getDistance(
-    cameraCoordinates,
-    weatherData.area_metadata[30].label_location
-  );
-  console.log(distance);
+  // console.log(weatherData);
+  // const distance = getDistance(
+  //   cameraCoordinates,
+  //   weatherData.area_metadata[30].label_location
+  // );
+  // console.log(distance);
 
   const distanceArray = weatherData.area_metadata.map((item) => {
     return getDistance(cameraCoordinates, item.label_location);

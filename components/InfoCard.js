@@ -69,7 +69,7 @@ function InfoCard({
       <div className="flex flex-col flex-grow pl-5">
         <div className="flex justify-between">
           <p> {location} </p>
-          <div className="h-7 cursor-pointer text-2xl">👻🚴🏼‍♀️</div>
+          <div className="h-7 cursor-pointer text-2xl">🇸🇬</div>
         </div>
         <h4 className="text-xl">
           <span className="font-bold">{searchInput}</span>
@@ -97,10 +97,8 @@ function InfoCard({
           </p>
 
           <div>
-            <p className="text-lg font-semibold pb-2 lg:text-2xl">
-              Long: {longitude}
-            </p>
-            <p className="text-right text-lg lg:text-2xl">Lati: {latitude}</p>
+            <p className="text-sm text-gray-500">Long: {longitude}</p>
+            <p className="text-sm text-gray-500">Lati: {latitude}</p>
           </div>
         </div>
       </div>
