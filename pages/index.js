@@ -18,6 +18,69 @@ export default function Home({
   // console.log(trafficData);
   // console.log(addressData);
 
+  // get dynamic data for every time refresh the page
+  const getData = () => {
+    const date = new Date(+new Date() + 8 * 3600 * 1000);
+    var dateString = date.toISOString();
+
+    trafficData = fetch(
+      "https://api.data.gov.sg/v1/transport/traffic-images?date_time=" +
+        dateString.substring(0, 19)
+    ).then((res) => res.json());
+
+    weatherData = fetch(
+      "https://api.data.gov.sg/v1/environment/air-temperature?date=" +
+        dateString.substring(0, 10)
+    ).then((res) => res.json());
+
+    // weather Emoji Icons
+    // ☀️ 🌤 ⛅️ 🌥 ☁️ 🌦 🌧 ⛈ 🌩 🌨 ❄️ ☃️ ⛄️ 🌬 💨 💧 💦 ☔️ ☂️
+
+    // const weatherForecastData = await fetch(
+    //   "https://api.data.gov.sg/v1/environment/2-hour-weather-forecast?date_time=" +
+    //     dateString
+    // ).then((res) => res.json());
+
+    addressData = new Array();
+    let address1 = {};
+    const getReverseGeoAddress = async (location, address) => {
+      const response = fetch(
+        "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
+          location.latitude +
+          "," +
+          location.longitude +
+          "&key=" +
+          process.env.GOOGLE_MAPS_APIKEY
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.results[0]) {
+            address = data.results[0];
+            // console.log(address);
+            addressData.push(address);
+          } else {
+            address = { formatted_address: "Unknown" };
+            // console.log(address);
+            addressData.push(address);
+          }
+        });
+    };
+
+    // Reverse Geocoding temporily disabled, as it causes too many requests to Google Maps API
+    for (let i = 0; i < trafficData.items[0].cameras.length; i++) {
+      // console.log(trafficData.items[0].cameras[i].location);
+      getReverseGeoAddress(trafficData.items[0].cameras[i].location, address1);
+    }
+
+    // Prepare data for the traffic and address data mapping
+    trafficAddressData = trafficData.items[0].cameras?.map((item, i) => ({
+      cameraId: item.camera_id,
+      imageUrl: item.image,
+      location: item.location,
+      address: addressData[i].formatted_address + " (" + item.camera_id + ")",
+    }));
+  };
+
   return (
     <div className="">
       <Head>
