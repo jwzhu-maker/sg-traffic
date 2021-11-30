@@ -1,4 +1,4 @@
-import Image from "next/image";
+//import Image from "next/image";
 import { useRouter } from "next/dist/client/router";
 
 function SmallCard({ img, timestamp, location, address, trafficAddressData }) {
@@ -37,9 +37,9 @@ function SmallCard({ img, timestamp, location, address, trafficAddressData }) {
     >
       {/* left */}
       <div className="relative h-96 w-96">
-        <Image
+        <img
           className="rounded-xl hover:shadow-xl
-        active:scale-90 transition duration-150"
+        active:scale-90 transition duration-150 w-[400px], h-[350px]"
           src={img}
           layout="fill"
         />
