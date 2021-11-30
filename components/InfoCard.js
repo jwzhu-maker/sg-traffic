@@ -47,6 +47,8 @@ function InfoCard({
         return "⛄️";
       case "windy":
         return "🌬";
+      case "fair (night)":
+        return "💨";
       default:
         return "🌦";
     }

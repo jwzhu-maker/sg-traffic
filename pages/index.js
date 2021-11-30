@@ -5,7 +5,6 @@ import SmallCard from "../components/SmallCard";
 import MediumCard from "../components/MediumCard";
 import LargeCard from "../components/LargeCard";
 import Footer from "../components/Footer";
-import { useState } from "react";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 export default function Home({
@@ -143,7 +142,7 @@ export default function Home({
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const date = new Date(+new Date() + 8 * 3600 * 1000);
   var dateString = date.toISOString();
 

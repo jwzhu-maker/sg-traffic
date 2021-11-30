@@ -107,7 +107,9 @@ function Header({
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
           type="text"
-          placeholder={placeholder || "Start your search. | Type '.' for all cameras."}
+          placeholder={
+            placeholder || "Start your search. | Type '.' for all cameras."
+          }
           className="flex-grow pl-5 bg-transparent outline-none text-gray-600 text-sm placeholder-gray-400"
         />
         <SearchIcon
@@ -125,7 +127,12 @@ function Header({
         <div className="hidden md:inline cursor-pointer text-lg">Singapore</div>
 
         {/* <GlobeAltIcon className="h-6 cursor-pointer animate-spin" /> */}
-        <div className="h-6 cursor-pointer animate-spin text-lg">🌎</div>
+        <div
+          className="h-6 cursor-pointer animate-spin text-lg"
+          onClick={() => window.location.reload(false)}
+        >
+          <p title="refresh">🌎</p>
+        </div>
 
         <div className="hidden md:inline justify-end text-sm text-gray-400">
           {formattedDate}
